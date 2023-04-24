@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-# configure a remote server to disable password
-# authentication
-
-Host *
-	Hostname 18.209.178.180
-	User ubuntu
-	IdentifyFile ~/.ssh.school
-	PasswordAuthentication no
