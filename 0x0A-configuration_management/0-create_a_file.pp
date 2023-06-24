@@ -4,7 +4,7 @@ $filepath = '/tmp/school'
 $filemode = '0744'
 $fileowner = 'www-data'
 $filegroup = 'www-data'
-$filecontent = 'I love puppet\n'
+$filecontent = 'I love Puppet\n'
 
 # Create the file resources
 file { $filepath:
