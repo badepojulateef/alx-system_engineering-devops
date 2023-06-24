@@ -12,5 +12,5 @@ file { $filepath:
   mode    => $filemode,
   owner   => $fileowner,
   group   => $filegroup,
-  content => $filecontenit,
+  content => $filecontent,
 }
