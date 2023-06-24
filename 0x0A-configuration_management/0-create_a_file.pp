@@ -6,12 +6,11 @@ $fileowner = 'www-data'
 $filegroup = 'www-data'
 $filecontent = 'I love puppet\n'
 
-
 # Create the file resources
 file { $filepath:
   ensure  => file,
   mode    => $filemode,
   owner   => $fileowner,
   group   => $filegroup,
-  content => $filecontent,
+  content => $filecontenit,
 }
