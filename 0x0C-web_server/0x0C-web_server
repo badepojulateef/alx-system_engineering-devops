@@ -12,7 +12,7 @@ ip = $2
 user = $3
 ssh_key = $4
 
-if [ $# -ge 4];
+if [ $# -ge 4]
 then
 	# Transfer file to server using scp command (ssh_key or path present)
 	scp -o StrictHostKeyChecking=no -i $ssh_key $file_path $user@$ip:~/
