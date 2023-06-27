@@ -4,38 +4,15 @@
 # Update the package manager cache
 sudo apt-get update
 
-# Upgrade the upgrade
-sudo apt-get install -y upgrade
-
 # Install nginx
 sudo apt-get -y install nginx
 
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo service nginx stop
-
-new_config="server_name \_\;\n\tlocation \/redirect_me \{\n\t\treturn 301 \$scheme\:\/\/\$http_host;\n\t\}\n"
+new_config="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.google.com permanent;"
 
 sudo sed -i "s/server_name _;/$new_config/" /etc/nginx/sites-enabled/default
 
 sudo nginx -t
 
 sudo service nginx start
-
-# This script installs nginx web server and start it listening on port 80
-
-# Update the package manager cache
-sudo apt-get update
-
-# Install nginx
-# sudo apt-get -y install nginx
-
-# echo "Hello World!" | sudo tee /var/www/html/index.html
-
-# new_config="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.google.com permanent;"
-
-# sudo sed -i "s/server_name _;/$new_config/" /etc/nginx/sites-enabled/default
-
-# sudo nginx -t
-
-# sudo service nginx start
