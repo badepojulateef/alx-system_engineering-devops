@@ -4,7 +4,8 @@ exec {'Configure ubuntu machine':
   command  => 'sudo apt-get update;
 		sudo apt-get install nginx -y;
 		echo "Hello World!" | sudo tee /var/www/html/index.html;
-		sudo sed -i "server_name _;/a $new_config" /etc/nginx/sites-enabled/default;
+		new_config="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.blog.ehoneahobed.com permanent;"
+		sudo sed -i "s/server_name _;/$new_config/" /etc/nginx/sites-enabled/default
 		sudo service nginx restart',
   provider => shell,
 }
