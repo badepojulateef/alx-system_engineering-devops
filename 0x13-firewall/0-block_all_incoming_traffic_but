@@ -1,0 +1,32 @@
+# Update the package list
+sudo apt-get -y update
+
+# Install ufw (Uncomplicated FireWall)
+sudo apt-get install ufw -y
+
+# Disable UFW rules
+sudo ufw disable
+
+# Check UFW status
+sudo ufw status
+
+# Set default policy for outgoing traffic to allow
+sudo ufw default allow outgoing
+
+# Set default policy for incoming traffic to deny
+sudo ufw default deny incoming
+
+# Stop ufw service
+sudo systemctl stop ufw
+
+# Allow incoming traffic from on port 22 for ssh
+sudo ufw allow ssh/tcp
+
+# Allow incoming traffic from on port 443 for https
+sudo ufw allow https/tcp
+
+# Allow incoming traffic on port 80 for http
+sudo ufw allow http/tcp
+
+# Enable ufw to apply rules
+sudo ufw enable
