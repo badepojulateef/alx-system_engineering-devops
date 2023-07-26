@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""  returns information about his/her TODO list progress """
+"""
+Returns information about his/her TODO list progress
+"""
 
-import sys
 import requests
+import sys
 
 
 def get_employee_todo_progress(employee_id):
@@ -30,9 +32,9 @@ def get_employee_todo_progress(employee_id):
     todos = requests.get(base_url + "todos", params={"userId": sys.argv[1]})\
                     .json()
 
-    print(users)
-    print('-------------')
-    print(todos)
+    # print(users)
+    # print('-------------')
+    # print(todos)
     # Fetch the employee's TODO list progress from the API
 
     # data = users.json()
@@ -44,8 +46,10 @@ def get_employee_todo_progress(employee_id):
     total_tasks = len(todos)
 
     # Display the information in the specified format
-    print(f"Employee {employee_name} is done\
-            with tasks({num_done_tasks}/{total_tasks}):")
+    output = "Employee {} is done with tasks({}/{}):"\
+             .format(employee_name, num_done_tasks, total_tasks)
+
+    print(output)
 
     # Display the titles of completed tasks
     for task in done_tasks:
