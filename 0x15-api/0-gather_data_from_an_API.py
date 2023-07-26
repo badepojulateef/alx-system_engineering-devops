@@ -26,33 +26,30 @@ def get_employee_todo_progress(employee_id):
     """
 
     # Replace this with the actual API URL
-    base_url = "https://jsonplaceholder.typicode.com/"
-
-    users = requests.get(base_url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(base_url + "todos", params={"userId": sys.argv[1]})\
-                    .json()
-
-    # print(users)
-    # print('-------------')
-    # print(todos)
-    # Fetch the employee's TODO list progress from the API
-
-    # data = users.json()
+    base_url = "https://jsonplaceholder.typicode.com"
+    user_url = "{}/users/{}".format(base_url, sys.argv[1])
+    todos_url = "{}/todos/".format(base_url)
 
     # Extract relevant information from the response
-    employee_name = users["name"]
-    done_tasks = [task for task in todos if task["completed"]]
-    num_done_tasks = len(done_tasks)
+    employee = requests.get(user_url).json()
+    todos = requests.get(todos_url, params={"userId": sys.argv[1]}).json()
+
+    # Extract the employee name
+    employee_name = employee["name"]
+
+    completed_tasks = [task for task in todos if task["completed"]]
+    len_completed_tasks = len(completed_tasks)
     total_tasks = len(todos)
 
     # Display the information in the specified format
-    output = "Employee {} is done with tasks({}/{}):"\
-             .format(employee_name, num_done_tasks, total_tasks)
+    first_line = "Employee {} is done with tasks({}/{}):"\
+                 .format(employee_name, len_completed_tasks, total_tasks)
 
-    print(output)
+    # Print the first_line
+    print(first_line)
 
     # Display the titles of completed tasks
-    for task in done_tasks:
+    for task in completed_tasks:
         print("\t {}".format(task['title']))
 
 
