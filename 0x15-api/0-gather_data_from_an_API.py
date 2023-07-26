@@ -57,7 +57,6 @@ def get_employee_todo_progress(employee_id):
 
 
 if __name__ == "__main__":
-    import sys
 
     if len(sys.argv) != 2:
         print("Usage: python script.py <employee_id>")
