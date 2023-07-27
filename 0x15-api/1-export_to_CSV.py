@@ -50,8 +50,7 @@ def get_employee_todo_progress(employee_id):
     # print(first_line)
 
     # Display the titles of completed tasks
-    for task in completed_tasks:
-        filename = "{}.csv".format(employee_id)
+    filename = "{}.csv".format(employee_id)
 
     # open new file for writing - will erase file if it already exists
     with open(filename, mode="w", newline='') as csvfile:
@@ -69,7 +68,7 @@ def get_employee_todo_progress(employee_id):
                       task_title
                   )
 
-            print(res)
+            # print(res)
             csvfile.write(res)
 
 
