@@ -57,13 +57,14 @@ def get_employee_todo_progress(employee_id):
 
         for task in todos:
             employee_id = task["userId"]
+            employee_username = employee["username"]
             task_completed_status = task["completed"]
             task_title = task["title"]
 
             res = '"{}","{}","{}","{}"\n'\
                   .format(
                       employee_id,
-                      employee_name,
+                      employee_username,
                       task_completed_status,
                       task_title
                   )
