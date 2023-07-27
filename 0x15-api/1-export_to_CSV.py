@@ -55,12 +55,12 @@ def get_employee_todo_progress(employee_id):
     # open new file for writing - will erase file if it already exists
     with open(filename, mode="w", newline='') as csvfile:
 
-        for task in completed_tasks:
+        for task in todos:
             employee_id = task["userId"]
             task_completed_status = task["completed"]
             task_title = task["title"]
 
-            res = '{},{},{},{}\n'\
+            res = '"{}","{}","{}","{}"\n'\
                   .format(
                       employee_id,
                       employee_name,
