@@ -52,11 +52,7 @@ def get_employee_todo_progress(employee_id):
             "username": employee["username"]
         })
 
-            # print(tasks_dict[str(employee_id)])
-            # tasks_dict[str(employee_id)].append(task_dict)
-
-    print(tasks_dict)
-            # print(res)
+    # print(tasks_dict)
 
     with open(str(employee_id) + ".json", mode="w", newline='') as jsonfile:
         json.dump(tasks_dict, jsonfile)
