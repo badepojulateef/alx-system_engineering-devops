@@ -42,37 +42,24 @@ def get_employee_todo_progress(employee_id):
     len_completed_tasks = len(completed_tasks)
     total_tasks = len(todos)
 
-    # Display the information in the specified format
-    first_line = "Employee {} is done with tasks({}/{}):"\
-                 .format(employee_name, len_completed_tasks, total_tasks)
-
-    # Print the first_line
-    # print(first_line)
-
-    # Display the titles of completed tasks
-    filename = "{}.json".format(employee_id)
-
     # open new file for writing - will erase file if it already exists
-    with open(filename, mode="w", newline='') as jsonfile:
+    tasks_dict = {employee_id: []}
 
-        tasks_dict = {str(employee_id): []}
+    for task in todos:
+        tasks_dict[employee_id].append({
+            "task": task["title"],
+            "completed": task["completed"],
+            "username": employee["username"]
+        })
 
-        for task in todos:
-            employee_id = task["userId"]
-            employee_username = employee["username"]
-            task_completed_status = task["completed"]
-            task_title = task["title"]
+            # print(tasks_dict[str(employee_id)])
+            # tasks_dict[str(employee_id)].append(task_dict)
 
-            task_dict = {
-                    "task": task["title"],
-                    "completed": task["completed"],
-                    "username": employee["username"]
-                }
-
-            tasks_dict[str(employee_id)].append(task_dict)
-
+    print(tasks_dict)
             # print(res)
-            json.dump(tasks_dict, jsonfile)
+
+    with open(str(employee_id) + ".json", mode="w", newline='') as jsonfile:
+        json.dump(tasks_dict, jsonfile)
 
 
 if __name__ == "__main__":
