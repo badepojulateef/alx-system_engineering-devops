@@ -29,11 +29,11 @@ def get_employee_todo_progress(employee_id):
     # Replace this with the actual API URL
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = "{}/users/{}".format(base_url, sys.argv[1])
-    todos_url = "{}/todos/".format(base_url)
+    todos_url = "{}/todos/".format(user_url)
 
     # Extract relevant information from the response
     employee = requests.get(user_url).json()
-    todos = requests.get(todos_url, params={"userId": sys.argv[1]}).json()
+    todos = requests.get(todos_url).json()
 
     # Extract the employee name
     employee_name = employee["name"]
