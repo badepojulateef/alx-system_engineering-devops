@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Writes information about his/her TODO list progress
+Records all tasks from all employees
 """
 
 import json
@@ -59,7 +59,7 @@ def get_employee_todo_progress(employee_id):
 
 
 if __name__ == "__main__":
-
+    """ Records all tasks from all employees """
     if len(sys.argv) != 2:
         print("Usage: python script.py <employee_id>")
         sys.exit(1)
