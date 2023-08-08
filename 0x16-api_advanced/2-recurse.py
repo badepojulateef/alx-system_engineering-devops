@@ -18,12 +18,11 @@ def recurse(subreddit, hot_list=[], after=None):
              Returns None if the subreddit is invalid or an error occurs.
     """
     if not subreddit:
-        print("None")
-        return
+        return None
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {"User-Agent": "CustomBot"}
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     params = {"after": after}
 
     try:
@@ -33,18 +32,18 @@ def recurse(subreddit, hot_list=[], after=None):
                 headers=headers,
                 allow_redirects=False
             )
-        
-        # print(res.status_code)
-        # print(res.json())
+
+        print(res.status_code)
+        print(res.json())
         if res.status_code != 200:
-            print("None")
-            return
+            return None
+
         data = res.json()
         articles = data["data"]["children"]
 
         if not articles:
             return hot_list
-        
+
         for article in articles:
             title = article["data"]["title"]
             hot_list.append(title)
