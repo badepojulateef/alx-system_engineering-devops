@@ -18,7 +18,7 @@ def top_ten(subreddit):
              Returns None if the subreddit is invalid or an error occurs.
     """
     if not subreddit:
-        print("None")    
+        print("None")
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {"User-Agent": "CustomBot"}
@@ -26,7 +26,12 @@ def top_ten(subreddit):
     params = {"limit": 10}
 
     try:
-        res = requests.get(url, params=params, headers=headers, allow_redirects=False)
+        res = requests.get(
+                url,
+                params=params,
+                headers=headers,
+                allow_redirects=False
+            )
         if res.status_code != 200:
             print("None")
             return
