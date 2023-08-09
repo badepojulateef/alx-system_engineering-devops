@@ -6,7 +6,7 @@ containing the titles of all hot articles for a given subreddit
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=[], after=""):
     """
     Retrieve the top ten posts for a given subreddit.
 
@@ -17,8 +17,8 @@ def recurse(subreddit, hot_list=[], after=None):
         str: Title of the top ten posts for the subreddit.
              Returns None if the subreddit is invalid or an error occurs.
     """
-    if not subreddit:
-        return None
+    if after is None:
+        return hot_list
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {"User-Agent": "CustomBot"}
@@ -33,24 +33,22 @@ def recurse(subreddit, hot_list=[], after=None):
                 allow_redirects=False
             )
 
-        print(res.status_code)
-        print(res.json())
+        # print('code', res.status_code)
+        # print(res.json())
         if res.status_code != 200:
             return None
 
-        data = res.json()
-        articles = data["data"]["children"]
+        after_res = res.json().get("data").get("after")
+        # print('after_res', after_res)
+        if after_res is not None:
+            after = after_res
+            recurse(subreddit, hot_list, after)
 
-        if not articles:
-            return hot_list
-
+        articles = res.json().get("data").get("children")
+        # print('r => ', r[0]["data"]["title"])
         for article in articles:
-            title = article["data"]["title"]
-            hot_list.append(title)
-
-        # Recursive call with the 'after' parameter to get the next page
-        after = data["data"]["after"]
-        return recurse(subreddit, hot_list, after)
+            hot_list.append(article["data"]["title"])
+        return hot_list
 
     except requests.RequestException as e:
         print("None")
