@@ -17,6 +17,8 @@ def recurse(subreddit, hot_list=[], after=""):
         str: Title of the top ten posts for the subreddit.
              Returns None if the subreddit is invalid or an error occurs.
     """
+    if subreddit is None:
+        return None
     if after is None:
         return hot_list
 
@@ -40,15 +42,20 @@ def recurse(subreddit, hot_list=[], after=""):
 
         after_res = res.json().get("data").get("after")
         # print('after_res', after_res)
-        if after_res is not None:
-            after = after_res
-            recurse(subreddit, hot_list, after)
+        # if after_res is not None:
+        # after = after_res
+        # recurse(subreddit, hot_list, after)
 
-        articles = res.json().get("data").get("children")
-        # print('r => ', r[0]["data"]["title"])
-        for article in articles:
-            hot_list.append(article["data"]["title"])
-        return hot_list
+        if after_res is None:
+            articles = res.json().get("data").get("children")
+            # print('r => ', r[0]["data"]["title"])
+            for article in articles:
+                hot_list.append(article["data"]["title"])
+            # print('hot_list => ', hot_list)
+            return hot_list
 
     except requests.RequestException as e:
-        print("None")
+        return None
+
+    after = after_res
+    return recurse(subreddit, hot_list, after)
