@@ -25,7 +25,7 @@ def count_words(subreddit, word_list, after="", word_obj={}):
 
     if after is None:
         word_list = [[key, value] for key, value in word_obj.items()]
-        word_list = sorted(word_list, key = lambda x: (-x[1], x[0]))
+        word_list = sorted(word_list, key=lambda x: (-x[1], x[0]))
 
         for w in word_list:
             if w[1]:
