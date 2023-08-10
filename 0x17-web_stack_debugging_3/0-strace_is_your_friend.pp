@@ -5,15 +5,10 @@ $file_to_edit = '/var/www/html/wp-settings.php'
 $old_string = 'phpp'
 $new_string = 'php'
 
-# Check if the file exists before proceeding
-if !file_exists($file_to_edit) {
-  fail("File ${file_to_edit} doest not exist")
-}
 
 # Define the exec resource to replace
 # the line using the 'sed' command
 exec {'fix bug':
   command => "sed -i 's/phpp/php/g' ${file_to_edit}",
-  path    => ['/bin', '/usr/bin'],
-  onlyif  => "grep -q 'phpp' ${file_to_edit}",
+  path    => ['/bin', '/usr/bin']
 }
