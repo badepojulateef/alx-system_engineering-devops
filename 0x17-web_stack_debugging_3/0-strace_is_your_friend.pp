@@ -13,9 +13,7 @@ if !file_exists($file_to_edit) {
 # Define the exec resource to replace
 # the line using the 'sed' command
 exec {'fix bug':
-  command     => "sed -i 's/${old_string}/${new_string}/g' ${file_to_edit}",
-  path        => ['/bin', '/usr/bin'],
-  refreshonly => true,
-  onlyif      => "grep -q 'phpp' ${file_to_edit}",
-  subscribe   => File[$file_to_edit]
+  command => "sed -i 's/phpp/php/g' ${file_to_edit}",
+  path    => ['/bin', '/usr/bin'],
+  onlyif  => "grep -q 'phpp' ${file_to_edit}",
 }
