@@ -16,6 +16,6 @@ exec {'fix bug':
   command     => "sed -i 's/${old_string}/${new_string}/g' ${file_to_edit}",
   path        => ['/bin', '/usr/bin'],
   refreshonly => true,
-  onlyif  => "grep -q 'phpp' ${file_to_edit}",
+  onlyif      => "grep -q 'phpp' ${file_to_edit}",
   subscribe   => File[$file_to_edit]
 }
