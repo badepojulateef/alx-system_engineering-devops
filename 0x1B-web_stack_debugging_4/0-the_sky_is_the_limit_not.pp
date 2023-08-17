@@ -7,7 +7,7 @@ exec {'increase-load':
 
 
 # Restart Nginx
--> exec {
+-> exec {'restart nginx':
   command => 'nginx restart',
   path    => '/etc/init.d/'
 }
